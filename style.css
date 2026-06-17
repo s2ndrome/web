@@ -10,7 +10,7 @@
 body{
     background:#f3f3f3;
     font-family:Pretendard,sans-serif;
-    padding:40px;
+    padding:30px;
 }
 
 .container{
@@ -29,6 +29,12 @@ body{
 
 .editor h1{
     font-size:42px;
+    margin-bottom:8px;
+}
+
+.subtitle{
+    font-size:13px;
+    color:#666;
     margin-bottom:20px;
 }
 
@@ -37,6 +43,7 @@ body{
     margin-top:14px;
     margin-bottom:6px;
     font-weight:600;
+    font-size:14px;
 }
 
 textarea,
@@ -49,6 +56,7 @@ select{
     border-radius:12px;
     background:#f6f6f6;
     font-size:14px;
+    font-family:inherit;
 }
 
 textarea{
@@ -58,19 +66,18 @@ textarea{
 
 input[type="file"]{
     width:100%;
-    padding:10px;
+}
+
+input[type="range"]{
+    width:100%;
 }
 
 input[type="color"]{
     width:100%;
     height:42px;
     border:none;
-    background:none;
     cursor:pointer;
-}
-
-input[type="range"]{
-    width:100%;
+    background:none;
 }
 
 button{
@@ -80,15 +87,16 @@ button{
     border:none;
     border-radius:12px;
     background:#111;
-    color:white;
+    color:#fff;
+    font-weight:700;
     cursor:pointer;
-    font-weight:600;
 }
 
 .preview{
     flex:1;
     display:flex;
     justify-content:center;
+    align-items:flex-start;
 }
 
 #card{
@@ -99,6 +107,12 @@ button{
     overflow:hidden;
     border-radius:8px;
     box-shadow:0 20px 50px rgba(0,0,0,.08);
+    flex-shrink:0;
+}
+
+#card.portrait{
+    width:550px;
+    height:688px;
 }
 
 #bgLayer{
@@ -117,54 +131,54 @@ button{
 }
 
 .quote-area{
-
     position:absolute;
-
-    left:60px;
-
-    top:120px;
-
-    width:420px;
+    left:55px;
+    top:95px;
+    width:440px;
 }
 
 #previewQuote{
-
-    width:420px;
-
-    font-size:20px;
-
+    width:440px;
+    font-size:24px;
     line-height:1.8;
-
     text-align:left;
-
     white-space:pre-wrap;
-
-    word-break:break-word;
-
-    overflow-wrap:anywhere;
+    word-break:keep-all;
+    overflow-wrap:break-word;
 }
 
 #quoteLine{
-
-    width:260px;
-
+    width:300px;
     height:1px;
-
     background:#111;
-
-    margin-top:26px;
+    margin-top:35px;
 }
 
 #previewInfo{
-
-    margin-top:12px;
-
-    font-size:11px;
-
+    margin-top:14px;
+    font-size:13px;
+    letter-spacing:.05em;
     text-align:left;
 }
 
+.site-decoration{
+    position:fixed;
+    left:65%;
+    bottom:30px;
+    transform:translateX(-50%);
+    z-index:999;
+    pointer-events:none;
+}
+
+.site-decoration img{
+    width:140px;
+}
+
 @media(max-width:1200px){
+
+    body{
+        padding:20px;
+    }
 
     .container{
         flex-direction:column;
@@ -174,25 +188,17 @@ button{
         width:100%;
     }
 
-    #card{
+    .preview{
         width:100%;
-        max-width:541px;
-        aspect-ratio:1/1;
-        height:auto;
     }
-}
-.site-decoration{
 
-    position:absolute;
+    #card{
+        width:550px;
+        max-width:100%;
+        height:550px;
+    }
 
-    left:50%;
-
-    transform:translateX(-50%);
-
-    top:750px;
-}
-
-.site-decoration img{
-
-    width:200px;
+    #card.portrait{
+        height:688px;
+    }
 }
