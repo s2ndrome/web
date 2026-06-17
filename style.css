@@ -92,8 +92,8 @@ button{
 }
 
 #card{
-    width:1080px;
-    height:1080px;
+    width:550px;
+    height:550px;
     background:#dedede;
     position:relative;
     overflow:hidden;
