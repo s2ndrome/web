@@ -136,32 +136,35 @@ function updateCard() {
 
 }
 
-const saveBtn = $('saveBtn');
+const saveBtn.addEventListener('click', async () => {
 
-if (saveBtn) {
+    try {
 
-  saveBtn.addEventListener('click', () => {
+        const canvas = await html2canvas(
+            document.getElementById('card'),
+            {
+                scale: 2,
+                useCORS: true,
+                logging: true
+            }
+        );
 
-    const card = $('card');
+        const link = document.createElement('a');
 
-    html2canvas(card, {
-      scale: 3,
-      useCORS: true,
-      backgroundColor: null
-    }).then((canvas) => {
+        link.download = 'quote.png';
 
-      const link =
-        document.createElement('a');
+        link.href = canvas.toDataURL('image/png');
 
-      link.download =
-        'quote.png';
+        link.click();
 
-      link.href =
-        canvas.toDataURL('image/png');
+    } catch (e) {
 
-      link.click();
+        console.error(e);
 
-    });
+        alert('저장 실패 - F12 콘솔 확인');
+
+    }
+
 
   });
 
