@@ -39,6 +39,7 @@ if (bgImageInput) {
       uploadedImage = event.target.result;
 
       updateCard();
+
     };
 
     reader.readAsDataURL(file);
@@ -57,7 +58,6 @@ function updateCard() {
   const textColor = $('textColor');
 
   const bgOpacity = $('bgOpacity');
-
   const fontSelect = $('fontSelect');
   const ratioSelect = $('ratioSelect');
 
@@ -67,16 +67,18 @@ function updateCard() {
   const card = $('card');
   const bgLayer = $('bgLayer');
 
-  if (!previewQuote || !previewInfo || !card) return;
+  if (!card) return;
 
-  // 텍스트
-  previewQuote.innerText =
-    quote ? quote.value : '';
+  if (previewQuote) {
+    previewQuote.innerText =
+      quote ? quote.value : '';
+  }
 
-  previewInfo.innerText =
-    `${character ? character.value : ''} │ ${creator ? creator.value : ''}`;
+  if (previewInfo) {
+    previewInfo.innerText =
+      `${character ? character.value : ''} │ ${creator ? creator.value : ''}`;
+  }
 
-  // 색상
   if (bgColor) {
     card.style.backgroundColor = bgColor.value;
   }
@@ -85,18 +87,20 @@ function updateCard() {
     card.style.color = textColor.value;
   }
 
-  // 폰트
   if (fontSelect) {
 
-    previewQuote.style.fontFamily =
-      fontSelect.value;
+    if (previewQuote) {
+      previewQuote.style.fontFamily =
+        fontSelect.value;
+    }
 
-    previewInfo.style.fontFamily =
-      fontSelect.value;
+    if (previewInfo) {
+      previewInfo.style.fontFamily =
+        fontSelect.value;
+    }
 
   }
 
-  // 배경 이미지
   if (bgLayer && bgOpacity) {
 
     bgLayer.style.opacity =
@@ -104,31 +108,24 @@ function updateCard() {
 
   }
 
-  if (bgLayer) {
+  if (bgLayer && uploadedImage) {
 
-    if (uploadedImage) {
-
-      bgLayer.style.backgroundImage =
-        `url(${uploadedImage})`;
-
-    } else {
-
-      bgLayer.style.backgroundImage = 'none';
-
-    }
+    bgLayer.style.backgroundImage =
+      `url(${uploadedImage})`;
 
   }
 
-  // 비율
   if (ratioSelect) {
 
     if (ratioSelect.value === 'portrait') {
 
-      card.classList.add('portrait');
+      card.style.width = '541px';
+      card.style.height = '676px';
 
     } else {
 
-      card.classList.remove('portrait');
+      card.style.width = '550px';
+      card.style.height = '550px';
 
     }
 
@@ -136,35 +133,43 @@ function updateCard() {
 
 }
 
-const saveBtn.addEventListener('click', async () => {
+console.log('script loaded');
+
+const saveBtn = $('saveBtn');
+
+if (saveBtn) {
+
+  saveBtn.addEventListener('click', async () => {
 
     try {
 
-        const canvas = await html2canvas(
-            document.getElementById('card'),
-            {
-                scale: 2,
-                useCORS: true,
-                logging: true
-            }
-        );
+      const card = $('card');
 
-        const link = document.createElement('a');
+      const canvas = await html2canvas(card, {
+        scale: 3,
+        useCORS: true,
+        backgroundColor: null
+      });
 
-        link.download = 'quote.png';
+      const link = document.createElement('a');
 
-        link.href = canvas.toDataURL('image/png');
+      link.download = 'quote.png';
 
-        link.click();
+      link.href = canvas.toDataURL('image/png');
 
-    } catch (e) {
+      document.body.appendChild(link);
 
-        console.error(e);
+      link.click();
 
-        alert('저장 실패 - F12 콘솔 확인');
+      document.body.removeChild(link);
+
+    } catch (error) {
+
+      console.error(error);
+
+      alert('PNG 저장 실패');
 
     }
-
 
   });
 
