@@ -18,6 +18,7 @@ ids.forEach(id => {
 
   if (el) {
     el.addEventListener('input', updateCard);
+    el.addEventListener('change', updateCard);
   }
 });
 
@@ -68,12 +69,14 @@ function updateCard() {
 
   if (!previewQuote || !previewInfo || !card) return;
 
+  // 텍스트
   previewQuote.innerText =
     quote ? quote.value : '';
 
   previewInfo.innerText =
     `${character ? character.value : ''} │ ${creator ? creator.value : ''}`;
 
+  // 색상
   if (bgColor) {
     card.style.backgroundColor = bgColor.value;
   }
@@ -82,6 +85,7 @@ function updateCard() {
     card.style.color = textColor.value;
   }
 
+  // 폰트
   if (fontSelect) {
 
     previewQuote.style.fontFamily =
@@ -92,6 +96,7 @@ function updateCard() {
 
   }
 
+  // 배경 이미지
   if (bgLayer && bgOpacity) {
 
     bgLayer.style.opacity =
@@ -99,24 +104,31 @@ function updateCard() {
 
   }
 
-  if (bgLayer && uploadedImage) {
+  if (bgLayer) {
 
-    bgLayer.style.backgroundImage =
-      `url(${uploadedImage})`;
+    if (uploadedImage) {
+
+      bgLayer.style.backgroundImage =
+        `url(${uploadedImage})`;
+
+    } else {
+
+      bgLayer.style.backgroundImage = 'none';
+
+    }
 
   }
 
+  // 비율
   if (ratioSelect) {
 
     if (ratioSelect.value === 'portrait') {
 
-      card.style.width = '541px';
-      card.style.height = '676px';
+      card.classList.add('portrait');
 
     } else {
 
-      card.style.width = '541px';
-      card.style.height = '541px';
+      card.classList.remove('portrait');
 
     }
 
@@ -134,7 +146,8 @@ if (saveBtn) {
 
     html2canvas(card, {
       scale: 3,
-      useCORS: true
+      useCORS: true,
+      backgroundColor: null
     }).then((canvas) => {
 
       const link =
