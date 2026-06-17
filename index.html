@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quote Maker</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+</head>
+<body>
+<div class="container">
+  <aside class="editor">
+    <h1>대사 발췌</h1>
+    <p class="subtitle">야매라서 줄바꿈 알아서 하셔야 함</p>
+
+    <label>문구</label>
+    <textarea id="quote">샬라샬라
+샬라샬라</textarea>
+
+    <label>캐릭터</label>
+    <input type="text" id="character" value="캐릭터">
+
+    <label>제작자</label>
+    <input type="text" id="creator" value="제작자">
+
+    <label>배경색</label>
+    <input type="color" id="bgColor" value="#dedede">
+
+    <label>글자색</label>
+    <input type="color" id="textColor" value="#111111">
+
+    <label>배경 이미지</label>
+    <input type="file" id="bgImage" accept="image/*">
+
+    <label>배경 이미지 투명도</label>
+    <input type="range" id="bgOpacity" min="0" max="100" value="20">
+
+    <label>폰트</label>
+    <select id="fontSelect">
+      <option value="Pretendard">Pretendard</option>
+      <option value="Gowun Batang">Gowun Batang</option>
+    </select>
+
+    <label>비율</label>
+    <select id="ratioSelect">
+      <option value="square">1 : 1</option>
+      <option value="portrait">4 : 5</option>
+    </select>
+
+    <button id="saveBtn">PNG 저장</button>
+  </aside>
+
+  <main class="preview">
+    <div id="card">
+      <div id="bgLayer"></div>
+      <div class="content">
+        <div class="quote-area">
+          <div id="previewQuote">샬라샬라</div>
+          <div id="quoteLine"></div>
+          <div id="previewInfo">캐릭터 │ 제작자</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="script.js"></script>
+</body>
+<footer class="site-decoration">
+
+    <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FNgNja%2FdJMcaicHUwd%2FAAAAAAAAAAAAAAAAAAAAAHLnul0jT4DiIlfzZQGQlK306u37lcexyfI9cQlpeW4W%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1782831599%26allow_ip%3D%26allow_referer%3D%26signature%3D9hrsA2jvP3%252ByJln4QcpLhicUSUc%253D">
+
+
+</footer>
+</html>
