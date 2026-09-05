@@ -3,74 +3,78 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quote Maker</title>
+<title>SYNDROME &amp; LIA</title>
+<meta name="description" content="SYNDROME &amp; LIA">
 <link rel="stylesheet" href="style.css">
-<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-  
 </head>
 <body>
-<div class="container">
-  <aside class="editor">
-    <h1>대사 발췌</h1>
-    <p class="subtitle">야매라서 줄바꿈 알아서 하셔야 함</p>
 
-    <label>문구</label>
-    <textarea id="quote">샬라샬라
-샬라샬라</textarea>
+<div class="page">
 
-    <label>캐릭터</label>
-    <input type="text" id="character" value="캐릭터">
+  <header class="site-header">
+    <a href="#" class="logo" data-menu="home">SYNDROME &amp; LIA</a>
+    <nav class="site-nav" aria-label="주요 메뉴">
+      <button type="button" data-menu="seol">SEOL</button>
+      <button type="button" data-menu="gallery">GALLERY</button>
+      <button type="button" data-menu="log">LOG</button>
+      <button type="button" data-menu="share">SHARE</button>
+    </nav>
+  </header>
 
-    <label>제작자</label>
-    <input type="text" id="creator" value="제작자">
-
-    <label>배경색</label>
-    <input type="color" id="bgColor" value="#dedede">
-
-    <label>글자색</label>
-    <input type="color" id="textColor" value="#111111">
-
-    <label>배경 이미지</label>
-    <input type="file" id="bgImage" accept="image/*">
-
-    <label>배경 이미지 투명도</label>
-    <input type="range" id="bgOpacity" min="0" max="100" value="20">
-
-    <label>폰트</label>
-    <select id="fontSelect">
-      <option value="Pretendard">Pretendard</option>
-      <option value="Gowun Batang">Gowun Batang</option>
-    </select>
-
-    <label>비율</label>
-    <select id="ratioSelect">
-      <option value="square">1 : 1</option>
-      <option value="portrait">4 : 5</option>
-    </select>
-
-    <button id="saveBtn">PNG 저장</button>
-  </aside>
-
-  <main class="preview">
-    <div id="card">
-      <div id="bgLayer"></div>
-      <div class="content">
-        <div class="quote-area">
-          <div id="previewQuote">샬라샬라</div>
-          <div id="quoteLine"></div>
-          <div id="previewInfo">캐릭터 │ 제작자</div>
+  <main>
+    <section class="hero" id="slider" aria-roledescription="carousel">
+      <div class="hero-track" id="sliderTrack">
+        <div class="hero-slide">
+          <span class="hero-placeholder">이미지 슬라이드</span>
         </div>
       </div>
-    </div>
+      <button type="button" class="hero-arrow hero-arrow-prev" id="sliderPrev" aria-label="이전 이미지">‹</button>
+      <button type="button" class="hero-arrow hero-arrow-next" id="sliderNext" aria-label="다음 이미지">›</button>
+      <div class="hero-dots" id="sliderDots"></div>
+    </section>
+
+    <section class="content-row">
+      <div class="ribbon" aria-hidden="true">
+        <svg viewBox="0 0 300 190" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="ribbonShadow" x="-30%" y="-30%" width="160%" height="160%">
+              <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#000000" flood-opacity="0.10"/>
+            </filter>
+          </defs>
+          <g filter="url(#ribbonShadow)" fill="#ffffff" stroke="#dcdcdc" stroke-width="1.5" stroke-linejoin="round">
+            <path d="M150 96c-8-38-52-64-92-56-24 5-33 33-16 47 20 16 66 18 108 9z"/>
+            <path d="M150 96c8-38 52-64 92-56 24 5 33 33 16 47-20 16-66 18-108 9z"/>
+            <path d="M150 96c-30 6-52 30-58 62-3 17 15 29 28 18 18-16 26-50 30-80z"/>
+            <path d="M150 96c30 6 52 30 58 62 3 17-15 29-28 18-18-16-26-50-30-80z"/>
+            <circle cx="150" cy="97" r="15"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="chat" aria-hidden="true">
+        <div class="bubble bubble-received">Do it! That&rsquo;s awesome</div>
+        <div class="bubble bubble-sent">yea i&rsquo;m considering adopting another black cat</div>
+      </div>
+    </section>
+
+    <footer class="player-bar">
+      <button type="button" class="player-time" id="playerTime">00:00</button>
+      <button type="button" class="player-toggle" id="playerToggle">bgm</button>
+      <audio id="bgmAudio" loop preload="none" src="audio/bgm.mp3"></audio>
+    </footer>
   </main>
+
+</div>
+
+<div class="menu-overlay" id="menuOverlay" aria-hidden="true">
+  <div class="menu-backdrop" data-close="menu"></div>
+  <div class="menu-panel" role="dialog" aria-modal="true" aria-labelledby="menuTitle">
+    <button type="button" class="menu-close" data-close="menu" aria-label="닫기">×</button>
+    <p class="menu-title" id="menuTitle">메뉴</p>
+    <p class="menu-body" id="menuBody">준비 중입니다</p>
+  </div>
 </div>
 
 <script src="script.js"></script>
 </body>
-    <!--
-<footer class="site-decoration">
-    <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FNgNja%2FdJMcaicHUwd%2FAAAAAAAAAAAAAAAAAAAAAHLnul0jT4DiIlfzZQGQlK306u37lcexyfI9cQlpeW4W%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1782831599%26allow_ip%3D%26allow_referer%3D%26signature%3D9hrsA2jvP3%252ByJln4QcpLhicUSUc%253D">
--->
-
-</footer>
 </html>
